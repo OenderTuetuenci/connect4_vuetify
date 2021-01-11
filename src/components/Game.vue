@@ -79,22 +79,8 @@ export default {
       this.canvas.ctx.stroke();
     }
     axios.get("http://localhost:9000/json").then(response=> {
-      let cells = response.data.grid.cells
-      for(let i = 0;i<cells.length;i++) {
-        let val = cells[i].val;
-        let row = cells[i].row;
-        let col = cells[i].col;
-        if (val === 1) {
-          this.canvas.ctx.fillStyle = "#c82124";
-        } else {
-          this.canvas.ctx.fillStyle = "#3370d4";
-        }
-        if (val !== 0) {
-          this.canvas.ctx.beginPath();
-          this.canvas.ctx.arc(this.centerx[col], this.centery[row], this.cell.stone, 0, 2 * Math.PI);
-          this.canvas.ctx.fill();
-        }
-      }
+      let cells = response.data.grid.cells;
+      this.drawCircles(cells);
     });
     this.connect();
   },
